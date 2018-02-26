@@ -1,20 +1,17 @@
 //Test file for cracking the code interview programming questions
-#include <iostream>
 #include <string>
 #include <functional>
 #include "hash_table.h"
+#include "linked_list.h"
+#include "stack.h"
+#include "queue.h"
 
 using namespace std;
 
 void implementHashTable();
-
-//Hash Table Implementation
-//Data structure that maps keys to values for efficient lookups
-//Utilizes a hash function (keys --> int/long) and then map the hash code to an index in the array
-//Map the hash code to an index in the array
-//Handle collisions by utilizing linked lists
-
-
+void implementLinkedList();
+void implementStack();
+void implementQueue();
 
 int main()
 {
@@ -24,28 +21,40 @@ int main()
 	{
         cout<<"\n*************************************"<<endl;
         cout<<"Data Structure Implementation Examples"<<endl;
-        cout<<"\n*************************************"<<endl;
-        cout<<"1.Hash Table"<<endl;
-        cout<<"2.Exit"<<endl;		
+        cout<<"*************************************"<<endl;
+        cout<<"1. Hash Table"<<endl;
+		cout<<"2. Linked List"<<endl;
+		cout<<"3. Stack"<<endl;
+		cout<<"4. Queue"<<endl;
+        cout<<"5. Exit"<<endl;	
         cout<<"Enter your choice: ";
         cin >> choice;
+		cout<< endl;
         switch(choice){
 			case 1:
 				implementHashTable();
 				break;
 			case 2:
+				implementLinkedList();
+				break;
+			case 3:
+				implementStack();
+				break;
+			case 4:
+				implementQueue();
+				break;
+			case 5:
 				exit(1);
 				break;
 			default:
 				cout << "\nERROR: Please enter  valid Selection\n";
-       }		
-		
+       }			
 	}
-	
+	return 0;	
 }
 
-void implementHashTable(){
-
+void implementHashTable()
+{
     HashMap hash;
     int key, value;
     int choice;
@@ -67,18 +76,18 @@ void implementHashTable(){
 				cin >> value;
 				cout << "Enter key at which element to be inserted: ";
 				cin >> key;
-				hash.Insert(key, value);
+				hash.insert(key, value);
 				break;
 			case 2:
 				cout << "Enter key of the element to be searched: ";
 				cin >> key;
 				cout << "Element at key "<<key<<" : ";
-				hash.Search(key);
+				hash.search(key);
 				break;
 			case 3:
 				cout << "Enter key of the element to be deleted: ";
 				cin >> key;
-				hash.Remove(key);
+				hash.remove(key);
 				break;
 			case 4:
 				return;
@@ -88,4 +97,103 @@ void implementHashTable(){
     }
 }
 
+void implementLinkedList()
+{
+    LinkedList list;
+    list.push_back(1);
+    cout << "Added 1 to the list and now front is " << list.front() << endl;
+    list.pop_front();
+    cout << "Removed item" << endl;
+    list.push_front(2);
+    cout << "Added 2 to the list and now back is " << list.back() << endl;
+    list.pop_back();
+    cout << "Removed item" << endl;
+ 
+    for(int i=0; i < 5; i++)
+    {
+		list.push_back(10+i);
+		list.push_front(20+i);
+    }
+    cout << "List size after adding 10 elements is " << list.size() << endl;
+    while(!list.empty())
+    {
+		cout << "Popping front item = " << list.front() << endl;
+		list.pop_front();
+    }
+    cout << "Trying to pop an item that doesn't exist" << endl;
+    list.pop_front();
+    cout << "Renitiatlizing list" << endl;
+    for(int i=0; i < 5; i++)
+    {
+		list.push_back(10+i);
+		list.push_front(20+i);
+    }
+    while(!list.empty())
+    {
+        cout << "Popping back item = " << list.back() << endl;
+        list.pop_back();
+    }
+    cout << "Trying to pop an item that doesn't exist" << endl;
+    list.pop_back();
+ 
+    list.push_back(100);
+    list.push_front(101);
+    cout << "End of Test" << endl;	
+}
+
+void implementStack()
+{
+	Stack stack;
+	stack.push_top(1);
+	cout << "Added 1 to the stack and now front is: " << stack.peek() << endl;
+	stack.pop();
+	cout << "Removed Item. front is now: " << stack.peek() << endl;
+	stack.push_top(10);
+	cout << "Added 10 to the stack and now front is: " << stack.peek() << endl;
+	stack.pop();
+	cout << "Removed Item. front is now: " << stack.peek() << endl;
+	
+    for(int i=0; i < 5; i++)
+    {
+		stack.push_top(20+i);
+    }	
+    cout << "List size after adding 5 elements (in order of: 20, 21, 22, 23, 24) is " << stack.size() << endl;
+    while(!stack.is_empty())
+    {
+        cout << "Popping back item = " << stack.peek() << endl;
+		stack.pop();
+    }
+    cout << "Trying to pop an item that doesn't exist" << endl;
+    stack.pop();
+	
+	cout << "End of Test" << endl;	
+}
+
+void implementQueue()
+{
+	Queue queue;
+	queue.push_back(1);
+	cout << "Added 1 to the queue and now front is: " << queue.peek() << endl;
+	queue.pop();
+	cout << "Removed Item. back is now: " << queue.peek() << endl;
+	queue.push_back(10);
+	cout << "Added 10 to the queue and now front is: " << queue.peek() << endl;
+	queue.pop();
+	cout << "Removed Item. back is now: " << queue.peek() << endl;
+	
+    for(int i=0; i < 5; i++)
+    {
+		queue.push_back(20+i);
+    }	
+    cout << "List size after adding 5 elements (in order of: 20, 21, 22, 23, 24) is " << queue.size() << endl;
+    while(!queue.is_empty())
+    {
+        cout << "Popping back item = " << queue.peek() << endl;
+		queue.pop();
+    }
+    cout << "Trying to pop an item that doesn't exist" << endl;
+    queue.pop();
+	
+	cout << "End of Test" << endl;	
+}
 

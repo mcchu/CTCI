@@ -1,6 +1,16 @@
+#ifndef HASH_TABLE_H
+#define HASH_TABLE_H
+
 #include <iostream>
 
 const int TABLE_SIZE = 128;
+
+//------ Hash Table Implementation ------
+//Data structure that maps keys to values for efficient lookups
+//Utilizes a hash function (keys --> int/long) and then map the hash code to an index in the array
+//Map the hash code to an index in the array
+//Handle collisions by utilizing linked lists
+//----------------------------------------
 
 class HashEntry
 {
@@ -9,7 +19,8 @@ class HashEntry
 		int value;
 		HashEntry* next;	//Pointer
 		
-		HashEntry(int _key, int _value){
+		HashEntry(int _key, int _value)
+		{
 			this->key = _key;
 			this->value = _value;
 			this->next = NULL;
@@ -21,14 +32,16 @@ class HashMap
 	HashEntry **htable;
 	
 	public:
-		HashMap() {
+		HashMap() 
+		{
 			htable = new HashEntry*[TABLE_SIZE];
 			for(int i = 0; i < TABLE_SIZE; i++){
 				htable[i] = NULL;
 			}
 		}
 		
-		~HashMap(){
+		~HashMap()
+		{
 			for(int i = 0; i < TABLE_SIZE; i++){
 				HashEntry* entry = htable[i];
 				while(entry != NULL){
@@ -40,12 +53,15 @@ class HashMap
 			delete[] htable;
 		}
 		
-		int hashFunc(int key){
+		int hash_func(int key)
+		{
 			return key % TABLE_SIZE;
 		}
-		
-		void Insert(int key, int value){
-			int hash_val = hashFunc(key);
+
+		//Function: Inserts key/value pair into the HashMap
+		void insert(int key, int value)
+		{
+			int hash_val = hash_func(key);
 			HashEntry* prev = NULL;
 			HashEntry* entry = htable[hash_val];
 			
@@ -68,8 +84,10 @@ class HashMap
 			}
 		}
 		
-		void Remove(int key){
-			int hash_val = hashFunc(key);
+		//Function: Removes value from HashMap at Key valued
+		void remove(int key)
+		{
+			int hash_val = hash_func(key);
 			HashEntry* prev = NULL;
 			HashEntry* entry = htable[hash_val];
 			
@@ -87,8 +105,10 @@ class HashMap
 			delete entry;			
 		}
 		
-		void Search(int key){
-			int hash_val = hashFunc(key);
+		//Function: Outputs all the values in the HashMap at that key index
+		void search(int key)
+		{
+			int hash_val = hash_func(key);
 			HashEntry* entry = htable[hash_val];
 			while(entry != NULL){
 				if(entry->key == key){
@@ -98,3 +118,5 @@ class HashMap
 			}
 		}
 };
+
+#endif
