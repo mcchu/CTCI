@@ -1,104 +1,28 @@
 //Test file for cracking the code interview programming questions
-#include <string>
-#include <vector>
-#include <functional>
-#include <unordered_map>
-#include "hash_table.h"
-#include "linked_list.h"
-#include "stack.h"
-#include "queue.h"
-#include "bst.h"
+#include "main.h"
+#include "solution.h"
 
-using namespace std;
-
-void implementHashTable();
-void implementLinkedList();
-void implementStack();
-void implementQueue();
-void implementGraphBFS();
-
-//Graph BFS Functions
-void dfs(vector<vector<int>> &graph, vector<vector<int>> &output, vector<int> path, int start, int end);
-vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& graph);
-void printpath(vector<vector<int>> path);
-
-
-//Algorithm: Find and output the only number that appears once in the array
-vector<int> DistinctValues(vector<vector<int>> values)
-{
-	vector<int> output;
-	
-	for(vector<int> vec_val : values){
-		unordered_map<int,int> values_map;		
-		for(int val : vec_val){
-			values_map[val]++;
-		}
-		for(unordered_map<int,int>::iterator it = values_map.begin(); it != values_map.end(); it++){
-			if(it->second == 1){
-				output.push_back(it->first);
-			}
-		}
-	}
-	return output;
-}
-
-//Algorithm: Find and output the values that we can autocomplete
-vector<string> AutoComplete(vector<string> dict, string key)
-{
-	vector<string> completed;
-	
-	//First we need to parse the key into workable parts. 
-	vector<string> key_subs;
-	int st_idx = 0, idx = 0, len = 1;
-		
-	while(idx <= key.size()){
-		if(isupper(key[idx])){
-			st_idx = idx;
-			idx++;
-			while(islower(key[idx])){
-				idx++;
-				len++;
-			}
-			string subs = key.substr(st_idx,len);
-			key_subs.push_back(subs);		
-		}
-		else{
-			idx++;
-		}
-		len = 1;
-	}
-	
-	//Then we iterate through the dictionary to output our string
-	int count = 0;												
-	for(string str : dict){										//Loop through Dictionary First
-		int i = 0;
-		for(string ss : key_subs){								//Loop through Key Vectors
-			for(; i < str.size(); i++){				//Loop through String
-				if(str.substr(i).find(ss) != string::npos){
-					i += str.substr(i).find(ss);
-					count += 1;
-				}
-				else
-					break;
-			}
-		}
-		if(count == key_subs.size()){
-			completed.push_back(str);
-		}
-		count = 0;		
-	}
-	
-	return completed;
-}
 
 int main()
 {
+	Solution* sol = new Solution();
+	string s1 = "abcdefg";
+	string s2 = "fgabcde";
+	if(sol->isRotation(s1,s2)) cout << "True";
+	else	cout << "False";
+
+
+#if 0	
+	if(sol->oneAway(s1,s2)) cout << "True";
+	else				    cout << "False";
+
+	//IsUnique test
+	if(sol->isUnique(s1)) cout << "True";
+	else				  cout << "False";
 
 	//Find and output the only number that appears once in the array
-	//Sample Input: [2,2,2,6],[1,2,1,1,1,1]
-	//Sample Output: [6,2]
 	vector<vector<int>> values = {{2,2,2,6},{1,2,1,1,1,1,},{3,3,7},{9,9,9,10,9,9,9,9,9,9,9,9}};
-	vector<int> output = DistinctValues(values);
+	vector<int> output = sol->distinctValues(values);
 	cout << "== Outputting the number that apperas only once ==\n";
 	for(int i : output){
 		cout << i << endl;
@@ -106,16 +30,14 @@ int main()
 	cout << endl;
 	
 	//Given a string, autocomplete the string depending on the given input_iterator
-	//Sample Input: ["Data", "GVi", DaGVi","DataHandler"]
-	//Sample Output: ["DataGraphView","DataGraphHandler","DataGraphVisual"]["GraphViewData","DataGraphVisual"]["DataGraphView"]["DataGraphHandler"]
 	vector<string> s_values = {"DataGraphView", "DataGraphHandler", "DataGraphVisual", "GraphPartyOut"};
 	string input = "DG";
-	vector<string> s_output = AutoComplete(s_values, input);
+	vector<string> s_output = sol->autoComplete(s_values, input);
 	cout << "== Outputting the AutoCompleted string ==\n";
 	for(string s : s_output){
 		cout << s << endl;
 	}
-	
+#endif
 	
 	int choice;
 	while(0)

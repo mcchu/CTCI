@@ -1,8 +1,6 @@
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
 
-#include <iostream>
-
 //------ Linked List Implementation ------
 //Double-ended linked list. Each node in the linked list points to it's neighbors
 //Can append to the front and back in O(1) time.

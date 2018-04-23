@@ -1,8 +1,6 @@
 #ifndef STACK_H
 #define STACK_H
 
-#include <iostream>
-
 //------ Stack Implementation ------
 //Implemented using a linked list
 //Appends and removes only on the top in O(1) time

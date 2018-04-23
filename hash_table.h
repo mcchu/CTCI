@@ -1,8 +1,6 @@
 #ifndef HASH_TABLE_H
 #define HASH_TABLE_H
 
-#include <iostream>
-
 const int TABLE_SIZE = 128;
 
 //------ Hash Table Implementation ------

@@ -1,8 +1,6 @@
 #ifndef BST_H
 #define BST_H
 
-#include <iostream>
-
 //------ BST Implementation ------
 //
 //----------------------------------------
@@ -46,8 +44,8 @@ class BST
 			}
 			else if(node->val < newnode->val){	//Newnode goes to the right
 				if(node->right == NULL){
-					newnode->left == NULL;
-					newnode->right == NULL;
+					newnode->left = NULL;
+					newnode->right = NULL;
 					node->right = newnode;
 					std::cout << "Node added to right." << std::endl;
 					return;

@@ -1,8 +1,6 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-#include <iostream>
-
 //------ Queue Implementation ------
 //Implemented using a linked list
 //Appends and removes in order in O(1) time
